@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content>
+        <meta name="author"
+            content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.84.0">
+        <title>Form Koleksi Buku - Perpustakaan</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+            rel="stylesheet">
+        <style>
+        body {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            font-family: "Quicksand", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+        }
+    </style>
+    </head>
+
+    <body>
+        <main class="d-flex">
+            <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light"
+                style="width: 280px;">
+                <a href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <img src="assets/udb.png" class="bi me-2" height="32">
+                    <span class="fs-4">Perpustakaan</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="koleksi-buku.html" class="nav-link active"
+                            aria-current="page">
+                            <img class="bi me-2" width="16" height="16"
+                                src="https://img.icons8.com/?id=85767&format=png&color=ffffff"
+                                alt>Koleksi Buku
+                        </a>
+                    </li>
+                    <li>
+                        <a href="peminjaman.html" class="nav-link link-dark">
+                            <img class="bi me-2" width="16" height="16"
+                                src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=000000"
+                                alt>Peminjaman
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pengumuman.html" class="nav-link link-dark">
+                            <img class="bi me-2" width="16" height="16"
+                                src="https://img.icons8.com/?size=100&id=77&format=png&color=000000"
+                                alt>Pengumuman
+                        </a>
+                    </li>
+                    <li>
+                    <a href="anggota.html" class="nav-link link-dark">
+                         <img class="bi me-2" width="16" height="16"
+                            src="https://img.icons8.com/?size=100&id=12107&format=png&color=000000" alt>Manajemen Anggota
+                    </a>
+                </li>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                    <a href="#"
+                        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                        id="dropdownUser2" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img
+                            src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000"
+                            alt width="32" height="32"
+                            class="rounded-circle me-2">
+                        <strong>Admin Perpustakaan 1</strong>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow"
+                        aria-labelledby="dropdownUser2">
+                        <li>
+                            <a class="dropdown-item"
+                                href="profile.html">Profile</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="index.html">Sign
+                                out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content p-4 flex-grow-1"
+                style="background-image: url(assets/logo-trans.png);margin: 0;height: 100vh;background-size: cover;background-position: center;background-size: 450px 550px;background-repeat: no-repeat;">
+                <h2 class="mb-4" id="form-title">Form Koleksi Buku</h2>
+                <div class="container py-5">
+                    <form id="bookForm">
+                        <input type="hidden" id="bookId">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="judulBuku">Judul Buku</label>
+                                <input type="text" class="form-control" id="judulBuku" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="penulis">Penulis</label>
+                                <input type="text" class="form-control" id="penulis" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="penerbit">Penerbit</label>
+                                <input type="text" class="form-control" id="penerbit" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="tahunTerbit">Tahun Terbit</label>
+                                <input type="number" class="form-control" id="tahunTerbit" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="kategori">Kategori</label>
+                                <input type="text" class="form-control" id="kategori" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="stok">Stok</label>
+                                <input type="text" class="form-control" id="stok" placeholder="Contoh: 5 Buku" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="coverBuku">URL Cover Buku</label>
+                                <input type="url" class="form-control" id="coverBuku" placeholder="https://example.com/cover.jpg">
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-warning" id="submitButton">Simpan</button>
+                            <a href="koleksi-buku.html"
+                                class="btn btn-primary">Kembali</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <script>
+        /* global bootstrap: false */
+        (function () {
+            'use strict'
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        })();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookForm = document.getElementById('bookForm');
+            const formTitle = document.getElementById('form-title');
+            const submitButton = document.getElementById('submitButton');
+            const bookIdField = document.getElementById('bookId');
+            const judulBukuField = document.getElementById('judulBuku');
+            const penulisField = document.getElementById('penulis');
+            const penerbitField = document.getElementById('penerbit');
+            const tahunTerbitField = document.getElementById('tahunTerbit');
+            const kategoriField = document.getElementById('kategori');
+            const stokField = document.getElementById('stok');
+            const coverBukuField = document.getElementById('coverBuku');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const editBookId = urlParams.get('edit');
+
+            if (editBookId) {
+                formTitle.textContent = 'Edit Koleksi Buku';
+                submitButton.textContent = 'Update';
+                const books = JSON.parse(sessionStorage.getItem('books')) || [];
+                const bookToEdit = books.find(book => book.id === parseInt(editBookId));
+
+                if (bookToEdit) {
+                    bookIdField.value = bookToEdit.id;
+                    judulBukuField.value = bookToEdit.title;
+                    penulisField.value = bookToEdit.author;
+                    penerbitField.value = bookToEdit.publisher;
+                    tahunTerbitField.value = bookToEdit.year;
+                    kategoriField.value = bookToEdit.category;
+                    stokField.value = bookToEdit.stock;
+                    coverBukuField.value = bookToEdit.cover;
+                } else {
+                    alert('Buku tidak ditemukan!');
+                    window.location.href = 'koleksi-buku.html';
+                }
+            }
+
+            bookForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const bookData = {
+                    id: bookIdField.value ? parseInt(bookIdField.value) : (parseInt(sessionStorage.getItem('nextBookId') || '1')),
+                    title: judulBukuField.value,
+                    author: penulisField.value,
+                    publisher: penerbitField.value,
+                    year: parseInt(tahunTerbitField.value),
+                    category: kategoriField.value,
+                    stock: stokField.value,
+                    cover: coverBukuField.value
+                };
+
+                let books = JSON.parse(sessionStorage.getItem('books')) || [];
+
+                if (editBookId) { // Mode Edit
+                    const bookIndex = books.findIndex(book => book.id === bookData.id);
+                    if (bookIndex > -1) {
+                        books[bookIndex] = bookData;
+                    }
+                } else { // Mode Tambah
+                    books.push(bookData);
+                    sessionStorage.setItem('nextBookId', (bookData.id + 1).toString());
+                }
+
+                sessionStorage.setItem('books', JSON.stringify(books));
+                alert(editBookId ? 'Data buku berhasil diupdate!' : 'Buku baru berhasil ditambahkan!');
+                window.location.href = 'koleksi-buku.html';
+            });
+        });
+    </script>
+    </body>
+</html>

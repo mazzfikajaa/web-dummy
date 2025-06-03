@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Admin Perpustakaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f0f2f5; height: 100vh; font-family: "Quicksand", sans-serif; font-optical-sizing: auto; font-weight: 500; font-style: normal; }
+        .login-container { max-width: 500px; margin: auto; margin-top: 100px; background-color: white; padding: 2rem; border-radius: 15px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="text-center mb-3"> <img src="assets/udb.png" alt="Logo Admin" style="max-width: 150px;" /> </div>
+        <h3 class="text-center fw-bold">Login Admin</h3>
+        <h4 class="text-center mb-5 fw-bold">Perpustakaan Duta Bangsa</h4>
+        <form id="loginForm">
+            <div class="mb-3"> <label for="username" class="form-label">Username</label> <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan username" value="admin" required/> </div>
+            <div class="mb-3"> <label for="password" class="form-label">Password</label> <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password" value="admin" required/> </div>
+            <div class="d-grid"> <button type="submit" class="btn btn-primary">Login Admin</button> </div>
+            <div class="text-center mt-3"> <a href="#">Lupa password?</a> </div>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function getDefaultAvatar(name) {
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#d35400'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><rect width="60" height="60" fill="${color}"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="24" fill="white">${initials}</text></svg>`)}`;
+        }
+
+        function initializeDummyData() {
+            // Gunakan flag yang lebih umum jika semua data diinisialisasi di sini
+            if (!sessionStorage.getItem('dataInitializedThisSession')) {
+                const initialBooks = [
+                    { id: 1, cover: "https://cdn.gramedia.com/uploads/items/591701404_sapiens.jpg", title: "Sapiens", author: "Yuval Noah Harari", publisher: "Gramedia", year: 2013, category: "Sejarah", stock: "8 Buku" },
+                    { id: 2, cover: "https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/9786020633176_.Atomic_Habit.jpg", title: "Atomic Habits", author: "James Clear", publisher: "Penguin", year: 2018, category: "Pengembangan Diri", stock: "6 Buku" },
+                    { id: 3, cover: "https://ebooks.gramedia.com/ebook-covers/45496/image_highres/ID_FITE2018MTH12.jpg", title: "Filosofi Teras", author: "Henry Manampiring", publisher: "Kompas", year: 2018, category: "Filsafat", stock: "10 Buku" }
+                ];
+                sessionStorage.setItem('books', JSON.stringify(initialBooks));
+                sessionStorage.setItem('nextBookId', (initialBooks.length + 1).toString());
+                
+                // --- AWAL DATA PINJAMAN YANG DIPERBAIKI ---
+                const initialLoans = [
+                    { id: 1, borrowerName: "Ahmad Sutisna", nim: "20202021", bookTitle: "Sapiens", bookAuthor: "Yuval Noah Harari", loanDate: "2024-05-01", returnDate: "2024-05-15", status: "Dipinjam", bookCover: "https://cdn.gramedia.com/uploads/items/591701404_sapiens.jpg", userAvatar: getDefaultAvatar("Ahmad Sutisna") },
+                    { id: 2, borrowerName: "Budi Santoso", nim: "20202022", bookTitle: "Atomic Habits", bookAuthor: "James Clear", loanDate: "2024-05-10", returnDate: "2024-05-24", status: "Dipinjam", bookCover: "https://image.gramedia.net/rs:fit:0:0/plain/https://cdn.gramedia.com/uploads/items/9786020633176_.Atomic_Habit.jpg", userAvatar: getDefaultAvatar("Budi Santoso") },
+                    { id: 3, borrowerName: "Citra Dewi", nim: "20202023", bookTitle: "Filosofi Teras", bookAuthor: "Henry Manampiring", loanDate: "2024-04-20", returnDate: "2024-05-04", status: "Terlambat", bookCover: "https://ebooks.gramedia.com/ebook-covers/45496/image_highres/ID_FITE2018MTH12.jpg", userAvatar: getDefaultAvatar("Citra Dewi") },
+                    { id: 4, borrowerName: "Dian Permata", nim: "20202024", bookTitle: "Laut Bercerita", bookAuthor: "Leila S. Chudori", loanDate: "2024-05-15", returnDate: "2024-05-29", status: "Dikembalikan", bookCover: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1516602134i/36393774.jpg", userAvatar: getDefaultAvatar("Dian Permata") }
+                ];
+                // --- AKHIR DATA PINJAMAN YANG DIPERBAIKI ---
+                sessionStorage.setItem('loans', JSON.stringify(initialLoans));
+                sessionStorage.setItem('nextLoanId', (initialLoans.length + 1).toString());
+
+                // --- AWAL DATA PENGUMUMAN YANG DIPERBAIKI ---
+                const initialAnnouncements = [
+                    { id: 1, title: "Libur Hari Raya Idul Fitri", date: "2025-04-20", content: "Perpustakaan akan tutup pada tanggal 20-25 April 2025 dalam rangka Hari Raya Idul Fitri." },
+                    { id: 2, title: "Perpanjangan Waktu Peminjaman", date: "2025-05-15", content: "Bagi mahasiswa yang sedang dalam masa skripsi, dapat mengajukan perpanjangan waktu peminjaman buku dengan syarat dan ketentuan berlaku." },
+                    { id: 3, title: "Workshop Penulisan Ilmiah", date: "2025-06-01", content: "Akan diadakan workshop penulisan ilmiah untuk mahasiswa pada tanggal 1 Juni 2025 di ruang serbaguna perpustakaan. Segera daftar!" }
+                ];
+                // --- AKHIR DATA PENGUMUMAN YANG DIPERBAIKI ---
+                sessionStorage.setItem('announcements', JSON.stringify(initialAnnouncements));
+                sessionStorage.setItem('nextAnnouncementId', (initialAnnouncements.length + 1).toString());
+                
+                const adminProfile = { name: "Admin Perpustakaan UDB", username: document.getElementById('username').value, email: document.getElementById('username').value + "@perpus.udb.ac.id", status: "Petugas Perpustakaan", tel: "0812-3456-7890" };
+                sessionStorage.setItem('adminProfile', JSON.stringify(adminProfile));
+
+                const today = new Date().toISOString().split('T')[0];
+                const initialMembers = [
+                    { id: 1, name: "Ahmad Sutisna", nim: "20202021", prodi: "Teknik Informatika", status: "Aktif", tel: "081234567890", email: "ahmad@example.com", address: "Jl. Merdeka No. 10, Surakarta", avatar: getDefaultAvatar("Ahmad Sutisna"), tanggalBergabung: "2023-01-15" },
+                    { id: 2, name: "Budi Santoso", nim: "20202022", prodi: "Sistem Informasi", status: "Aktif", tel: "081234567891", email: "budi@example.com", address: "Jl. Slamet Riyadi No. 25, Surakarta", avatar: getDefaultAvatar("Budi Santoso"), tanggalBergabung: "2023-02-20" },
+                    { id: 3, name: "Citra Dewi", nim: "20202023", prodi: "Desain Komunikasi Visual", status: "Tidak Aktif", tel: "081234567892", email: "citra@example.com", address: "Jl. Adisucipto No. 5, Colomadu", avatar: getDefaultAvatar("Citra Dewi"), tanggalBergabung: today }
+                ];
+                sessionStorage.setItem('members', JSON.stringify(initialMembers));
+                sessionStorage.setItem('nextMemberId', (initialMembers.length + 1).toString());
+
+                sessionStorage.setItem('dataInitializedThisSession', 'true'); 
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'admin' && password === 'admin') {
+                sessionStorage.removeItem('dataInitializedThisSession'); 
+                sessionStorage.setItem('isLoggedIn', 'true');
+                initializeDummyData(); 
+                window.location.href = 'koleksi-buku.html';
+            } else { alert('Username atau password salah!'); }
+        });
+    </script>
+</body>
+</html>

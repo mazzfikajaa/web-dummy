@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daftar Anggota - Perpustakaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        body { min-height: 100vh; font-family: "Quicksand", sans-serif; font-weight: 500; }
+        .avatar-sm { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <main class="d-flex">
+        <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <img src="assets/udb.png" class="bi me-2" height="32"> <span class="fs-4">Perpustakaan</span>
+            </a> <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item"> <a href="koleksi-buku.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?id=85767&format=png&color=000000" alt>Koleksi Buku </a> </li>
+                <li> <a href="peminjaman.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=000000" alt>Peminjaman </a> </li>
+                <li> <a href="pengumuman.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=77&format=png&color=000000" alt>Pengumuman </a> </li>
+                <li> <a href="anggota.html" class="nav-link active" aria-current="page"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=12107&format=png&color=ffffff" alt>Manajemen Anggota </a> </li>
+            </ul> <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000" alt="User" width="32" height="32" class="rounded-circle me-2"> <strong id="sidebarAdminName">Admin</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="profile.html">Profile</a></li> <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="index.html">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content p-4 flex-grow-1" style="background-image: url(assets/logo-trans.png); margin: 0; height: 100vh; background-size: cover; background-position: center; background-size: 450px 550px; background-repeat: no-repeat;">
+            <h2 class="mb-4">Daftar Anggota Perpustakaan</h2>
+            <div class="mb-3">
+                <a href="form-anggota.html" class="btn btn-primary">+ Tambah Anggota</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>No</th>
+                            <th>Foto</th>
+                            <th>Nama Anggota</th>
+                            <th>NIM / ID</th>
+                            <th>Status</th>
+                            <th>Tgl. Bergabung</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="member-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function updateAdminNameSidebar() { /* ... (sama seperti sebelumnya) ... */ 
+            const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
+            if (adminProfile && adminProfile.name) {
+                document.getElementById('sidebarAdminName').textContent = adminProfile.name;
+            }
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const options = { day: '2-digit', month: 'short', year: 'numeric' };
+            return new Date(dateString).toLocaleDateString('id-ID', options);
+        }
+
+        function loadMembers() {
+            const members = JSON.parse(sessionStorage.getItem('members')) || [];
+            const tableBody = document.getElementById('member-table-body');
+            tableBody.innerHTML = '';
+
+            if (members.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Tidak ada data anggota.</td></tr>';
+                return;
+            }
+
+            members.forEach((member, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><img src="${member.avatar || getDefaultAvatar(member.name)}" alt="Avatar ${member.name}" class="avatar-sm"></td>
+                        <td>${member.name}</td>
+                        <td>${member.nim}</td>
+                        <td><span class="badge bg-${member.status === 'Aktif' ? 'success' : 'danger'}">${member.status}</span></td>
+                        <td>${formatDate(member.tanggalBergabung)}</td>
+                        <td>
+                            <a href="form-anggota.html?edit=${member.id}" class="btn btn-warning btn-sm">Edit</a>
+                            <button class="btn btn-danger btn-sm" onclick="deleteMember(${member.id})">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function deleteMember(memberId) {
+            if (confirm('Apakah Anda yakin ingin menghapus anggota ini?')) {
+                let members = JSON.parse(sessionStorage.getItem('members')) || [];
+                members = members.filter(member => member.id !== memberId);
+                sessionStorage.setItem('members', JSON.stringify(members));
+                loadMembers();
+            }
+        }
+        
+        // Fungsi ini mungkin diperlukan jika avatar default digunakan di tabel
+        function getDefaultAvatar(name) {
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#d35400'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" fill="${color}"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="16" fill="white">${initials}</text></svg>`)}`;
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAdminNameSidebar();
+            loadMembers();
+        });
+    </script>
+</body>
+</html>

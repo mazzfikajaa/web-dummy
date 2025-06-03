@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="pageTitle">Form Anggota - Perpustakaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style> body { min-height: 100vh; font-family: "Quicksand", sans-serif; font-weight: 500; } </style>
+</head>
+<body>
+    <main class="d-flex">
+        <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"> <img src="assets/udb.png" class="bi me-2" height="32"> <span class="fs-4">Perpustakaan</span> </a> <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item"> <a href="koleksi-buku.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?id=85767&format=png&color=000000" alt>Koleksi Buku </a> </li>
+                <li> <a href="peminjaman.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=000000" alt>Peminjaman </a> </li>
+                <li> <a href="pengumuman.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=77&format=png&color=000000" alt>Pengumuman </a> </li>
+                <li> <a href="anggota.html" class="nav-link active" aria-current="page"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=12107&format=png&color=ffffff" alt>Manajemen Anggota </a> </li>
+            </ul> <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000" alt="User" width="32" height="32" class="rounded-circle me-2"> <strong id="sidebarAdminName">Admin</strong> </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2"> <li><a class="dropdown-item" href="profile.html">Profile</a></li> <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="index.html">Sign out</a></li> </ul>
+            </div>
+        </div>
+
+        <div class="content p-4 flex-grow-1" style="background-image: url(assets/logo-trans.png); margin: 0; height: 100vh; background-size: cover; background-position: center; background-size: 450px 550px; background-repeat: no-repeat;">
+            <h2 class="mb-4" id="formTitle">Form Tambah Anggota Baru</h2>
+            <div class="container py-3">
+                <form id="memberForm">
+                    <input type="hidden" id="memberIdField"> <div class="row g-3">
+                        <div class="col-md-6"> <label for="namaLengkap" class="form-label">Nama Lengkap</label> <input type="text" class="form-control" id="namaLengkap" required> </div>
+                        <div class="col-md-6"> <label for="idAnggota" class="form-label">NIM / ID Anggota</label> <input type="text" class="form-control" id="idAnggota" required> </div>
+                        <div class="col-md-6"> <label for="programStudi" class="form-label">Program Studi</label> <input type="text" class="form-control" id="programStudi"> </div>
+                        <div class="col-md-6"> <label for="statusAnggota" class="form-label">Status</label> <select id="statusAnggota" class="form-select"> <option value="Aktif" selected>Aktif</option> <option value="Tidak Aktif">Tidak Aktif</option> </select> </div>
+                        <div class="col-md-6"> <label for="nomorTelepon" class="form-label">Nomor Telepon</label> <input type="tel" class="form-control" id="nomorTelepon"> </div>
+                        <div class="col-md-6"> <label for="emailAnggota" class="form-label">Email</label> <input type="email" class="form-control" id="emailAnggota"> </div>
+                        <div class="col-md-6"> <label for="tanggalBergabung" class="form-label">Tanggal Bergabung</label> <input type="date" class="form-control" id="tanggalBergabung" required> </div>
+                        <div class="col-md-6"> <label for="urlFoto" class="form-label">URL Foto Profil (Opsional)</label> <input type="url" class="form-control" id="urlFoto" placeholder="https://example.com/foto.jpg"> </div>
+                        <div class="col-md-12"> <label for="alamatAnggota" class="form-label">Alamat</label> <textarea class="form-control" id="alamatAnggota" rows="2"></textarea> </div>
+                    </div>
+                    <div class="mt-4"> <button type="submit" class="btn btn-primary" id="submitButton">Simpan Anggota</button> <a href="anggota.html" class="btn btn-secondary">Kembali</a> </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* global bootstrap: false */
+        (function () { /* ... (inisialisasi tooltip sama seperti sebelumnya) ... */ })();
+        
+        function updateAdminNameSidebar() { /* ... (sama seperti sebelumnya) ... */ 
+            const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
+            if (adminProfile && adminProfile.name) {
+                document.getElementById('sidebarAdminName').textContent = adminProfile.name;
+            }
+        }
+
+        function getDefaultAvatar(name) { /* ... (sama seperti sebelumnya) ... */ 
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#d35400'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><rect width="60" height="60" fill="${color}"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="24" fill="white">${initials}</text></svg>`)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAdminNameSidebar();
+            const memberForm = document.getElementById('memberForm');
+            const formTitle = document.getElementById('formTitle');
+            const pageTitle = document.getElementById('pageTitle');
+            const submitButton = document.getElementById('submitButton');
+            const memberIdField = document.getElementById('memberIdField');
+            
+            const namaLengkapField = document.getElementById('namaLengkap');
+            const idAnggotaField = document.getElementById('idAnggota');
+            const programStudiField = document.getElementById('programStudi');
+            const statusAnggotaField = document.getElementById('statusAnggota');
+            const nomorTeleponField = document.getElementById('nomorTelepon');
+            const emailAnggotaField = document.getElementById('emailAnggota');
+            const tanggalBergabungField = document.getElementById('tanggalBergabung');
+            const urlFotoField = document.getElementById('urlFoto');
+            const alamatAnggotaField = document.getElementById('alamatAnggota');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const editMemberId = urlParams.get('edit');
+            let isEditMode = false;
+
+            if (editMemberId) {
+                isEditMode = true;
+                const members = JSON.parse(sessionStorage.getItem('members')) || [];
+                const memberToEdit = members.find(m => m.id === parseInt(editMemberId));
+
+                if (memberToEdit) {
+                    formTitle.textContent = 'Edit Data Anggota';
+                    pageTitle.textContent = 'Edit Anggota - Perpustakaan';
+                    submitButton.textContent = 'Update Anggota';
+
+                    memberIdField.value = memberToEdit.id;
+                    namaLengkapField.value = memberToEdit.name;
+                    idAnggotaField.value = memberToEdit.nim;
+                    programStudiField.value = memberToEdit.prodi;
+                    statusAnggotaField.value = memberToEdit.status;
+                    nomorTeleponField.value = memberToEdit.tel;
+                    emailAnggotaField.value = memberToEdit.email;
+                    tanggalBergabungField.value = memberToEdit.tanggalBergabung;
+                    urlFotoField.value = memberToEdit.avatar.startsWith('data:image/svg+xml') ? '' : memberToEdit.avatar; // Jangan tampilkan SVG sebagai URL
+                    alamatAnggotaField.value = memberToEdit.address;
+                } else {
+                    alert('Anggota tidak ditemukan!');
+                    window.location.href = 'anggota.html';
+                }
+            } else {
+                // Mode Tambah: set tanggal bergabung default ke hari ini
+                tanggalBergabungField.value = new Date().toISOString().split('T')[0];
+                formTitle.textContent = 'Form Tambah Anggota Baru';
+                pageTitle.textContent = 'Tambah Anggota - Perpustakaan';
+                submitButton.textContent = 'Simpan Anggota';
+            }
+
+            memberForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                let members = JSON.parse(sessionStorage.getItem('members')) || [];
+                const memberData = {
+                    id: isEditMode ? parseInt(memberIdField.value) : parseInt(sessionStorage.getItem('nextMemberId') || '1'),
+                    name: namaLengkapField.value,
+                    nim: idAnggotaField.value,
+                    prodi: programStudiField.value,
+                    status: statusAnggotaField.value,
+                    tel: nomorTeleponField.value,
+                    email: emailAnggotaField.value,
+                    tanggalBergabung: tanggalBergabungField.value,
+                    avatar: urlFotoField.value || getDefaultAvatar(namaLengkapField.value),
+                    address: alamatAnggotaField.value
+                };
+
+                if (isEditMode) {
+                    const memberIndex = members.findIndex(m => m.id === memberData.id);
+                    if (memberIndex > -1) {
+                        members[memberIndex] = memberData;
+                    }
+                } else {
+                    members.push(memberData);
+                    sessionStorage.setItem('nextMemberId', (memberData.id + 1).toString());
+                }
+
+                sessionStorage.setItem('members', JSON.stringify(members));
+                alert(isEditMode ? 'Data anggota berhasil diupdate!' : 'Anggota baru berhasil ditambahkan!');
+                window.location.href = 'anggota.html';
+            });
+        });
+    </script>
+</body>
+</html>
