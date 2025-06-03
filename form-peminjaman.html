@@ -1,182 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content>
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
     <title>Tambah Peminjaman - Perpustakaan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <style>
-        /* ... (CSS styles tetap sama dari file asli Anda) ... */
-        body {
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            font-family: "Quicksand", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 500;
-            font-style: normal;
-            background-color: #f8f9fa;
-        }
-        
-        .content {
-            background-color: #f8f9fa;
-            /* background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23e9ecef" stroke-width="0.5"/></svg>'); */
-            background-size: 20px 20px;
-            min-height: 100vh;
-        }
-        
-        .form-container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 2rem;
-        }
-        
-        .book-cover-preview {
-            width: 150px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border: 1px solid #dee2e6;
-        }
-        
-        .form-label {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(120deg, #3498db, #2980b9);
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-        }
-        
-        .btn-warning {
-            background: linear-gradient(120deg, #f39c12, #e67e22);
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-        }
-        
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #3498db;
-            padding: 2px;
-        }
-        
-        .info-card {
-            border-left: 4px solid #3498db;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1rem;
-        }
-        
-        .info-card h6 {
-            color: #2c3e50;
-            font-weight: 700;
-        }
-        
-        .info-card p {
-            color: #7f8c8d;
-            margin-bottom: 0;
-        }
-        
-        .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        
-        .book-detail {
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            padding: 1rem;
-            background: #f8f9fa;
-        }
+        body { min-height: 100vh; font-family: "Quicksand", sans-serif; font-weight: 500; background-color: #f8f9fa; }
+        .content { min-height: 100vh; /* Hapus background-image SVG jika tidak diperlukan lagi */ }
+        .form-container { background-color: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 2rem; }
+        .book-cover-preview { width: 150px; height: 200px; object-fit: cover; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #dee2e6; }
+        .form-label { font-weight: 600; color: #2c3e50; }
+        .user-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #3498db; padding: 2px; }
+        .info-card { border-left: 4px solid #3498db; background: #f8f9fa; border-radius: 8px; padding: 1rem; }
+        .info-card h6 { color: #2c3e50; font-weight: 700; }
+        .info-card p { color: #7f8c8d; margin-bottom: 0; }
+        .book-detail { border: 1px solid #dee2e6; border-radius: 8px; padding: 1rem; background: #f8f9fa; }
     </style>
 </head>
 
 <body>
     <main class="d-flex">
-            <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light"
-                style="width: 280px;">
-                <a href="/"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <img src="assets/udb.png" class="bi me-2" height="32">
-                    <span class="fs-4">Perpustakaan</span>
-                </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="koleksi-buku.html" class="nav-link link-dark"
-                            aria-current="page">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?id=85767&format=png&color=000000"
-                                alt>Koleksi Buku
-                        </a>
-                    </li>
-                    <li>
-                        <a href="peminjaman.html" class="nav-link active">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=ffffff"
-                                alt>Peminjaman
-                        </a>
-                    </li>
-                    <li>
-                        <a href="pengumuman.html" class="nav-link link-dark">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?size=100&id=77&format=png&color=000000"
-                                alt>Pengumuman
-                        </a>
-                    </li>
-                    <li>
-                    <a href="anggota.html" class="nav-link link-dark">
-                         <img class="bi me-2" width="16" height="16"
-                            src="https://img.icons8.com/?size=100&id=12107&format=png&color=000000" alt>Manajemen Anggota
-                    </a>
-                </li>
-                </ul>
-                <hr>
-                <div class="dropdown">
-                    <a href="#"
-                        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                        id="dropdownUser2" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img
-                            src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000"
-                            alt width="32" height="32"
-                            class="rounded-circle me-2">
-                        <strong id="sidebarAdminNameDetail">Admin Perpustakaan 1</strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow"
-                        aria-labelledby="dropdownUser2">
-                        <li>
-                            <a class="dropdown-item" href="profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="index.html">Sign
-                                out</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"> <img src="assets/udb.png" class="bi me-2" height="32"> <span class="fs-4">Perpustakaan</span> </a> <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item"> <a href="koleksi-buku.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?id=85767&format=png&color=000000" alt>Koleksi Buku </a> </li>
+                <li> <a href="peminjaman.html" class="nav-link active" aria-current="page"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=ffffff" alt>Peminjaman </a> </li>
+                <li> <a href="pengumuman.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=77&format=png&color=000000" alt>Pengumuman </a> </li>
+                <li> <a href="anggota.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=12107&format=png&color=000000" alt>Manajemen Anggota </a> </li>
+            </ul> <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000" alt="User" width="32" height="32" class="rounded-circle me-2"> <strong id="sidebarAdminNameDetail">Admin</strong> </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2"> <li><a class="dropdown-item" href="profile.html">Profile</a></li> <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="index.html">Sign out</a></li> </ul>
             </div>
+        </div>
+
         <div class="content p-4 flex-grow-1">
             <h2 class="mb-4">Tambah Peminjaman Buku</h2>
             <div class="container py-3">
@@ -189,59 +49,37 @@
                                     <label class="form-label" for="searchAnggota">Cari Anggota (Nama atau NIM)</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="searchAnggota" placeholder="Ketik nama atau NIM">
-                                        <button class="btn btn-outline-secondary" type="button" id="findAnggotaButton">
-                                            Cari
-                                        </button>
+                                        <button class="btn btn-outline-secondary" type="button" id="findAnggotaButton">Cari</button>
                                     </div>
-                                     <small id="anggotaHelp" class="form-text text-muted">Contoh: Ahmad Sutisna / 20202021</small>
+                                    <small id="anggotaHelp" class="form-text text-muted">Contoh: Ahmad Sutisna / 20202021</small>
                                 </div>
-                                
                                 <div class="info-card mb-4" id="anggotaInfoCard" style="display:none;">
                                     <div class="d-flex align-items-center mb-3">
-                                        <img src="" class="user-avatar me-3" id="anggotaAvatar">
-                                        <div>
-                                            <h5 class="mb-0" id="anggotaNama">Nama Anggota</h5>
-                                            <p class="mb-0" id="anggotaNim">NIM:</p>
-                                        </div>
+                                        <img src="" class="user-avatar me-3" id="anggotaAvatar" alt="Avatar Anggota">
+                                        <div> <h5 class="mb-0" id="anggotaNama">Nama Anggota</h5> <p class="mb-0" id="anggotaNim">NIM:</p> </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6">
-                                            <h6>Program Studi</h6>
-                                            <p id="anggotaProdi">Teknik Informatika</p>
-                                        </div>
-                                        <div class="col-6">
-                                            <h6>Status</h6>
-                                            <p><span class="badge bg-success" id="anggotaStatus">Aktif</span></p>
-                                        </div>
-                                        <div class="col-12">
-                                            <h6>Peminjaman Aktif</h6>
-                                            <p id="anggotaPeminjamanAktif">0 buku sedang dipinjam</p>
-                                        </div>
+                                        <div class="col-6"><h6 >Program Studi</h6><p id="anggotaProdi"></p></div>
+                                        <div class="col-6"><h6 >Status</h6><p><span class="badge bg-success" id="anggotaStatus"></span></p></div>
+                                        <div class="col-12"><h6 >Peminjaman Aktif</h6><p id="anggotaPeminjamanAktif">Info tidak tersedia</p></div>
                                     </div>
                                 </div>
-                                <input type="hidden" id="selectedAnggotaName">
-                                <input type="hidden" id="selectedAnggotaNim">
-                                <input type="hidden" id="selectedAnggotaAvatar">
+                                <input type="hidden" id="selectedAnggotaName"> <input type="hidden" id="selectedAnggotaNim"> <input type="hidden" id="selectedAnggotaAvatar">
                             </div>
                             
                             <div class="col-md-6">
                                 <h4 class="mb-3">Data Buku</h4>
                                 <div class="mb-3">
-                                    <label class="form-label" for="searchBuku">Cari Buku (Judul, Penulis, atau ISBN)</label>
+                                    <label class="form-label" for="searchBuku">Cari Buku (Judul atau Penulis)</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="searchBuku" placeholder="Ketik judul, penulis, atau ISBN">
-                                        <button class="btn btn-outline-secondary" type="button" id="findBukuButton">
-                                            Cari
-                                        </button>
+                                        <input type="text" class="form-control" id="searchBuku" placeholder="Ketik judul atau penulis">
+                                        <button class="btn btn-outline-secondary" type="button" id="findBukuButton">Cari</button>
                                     </div>
                                      <small id="bukuHelp" class="form-text text-muted">Contoh: Sapiens</small>
                                 </div>
-                                
                                 <div class="book-detail mb-4" id="bukuInfoCard" style="display:none;">
                                     <div class="d-flex">
-                                        <div class="me-3">
-                                            <img src="" alt="Cover" class="book-cover-preview" id="bukuCoverPreview">
-                                        </div>
+                                        <div class="me-3"><img src="" alt="Cover Buku" class="book-cover-preview" id="bukuCoverPreview"></div>
                                         <div class="flex-grow-1">
                                             <h5 class="mb-1" id="bukuJudul">Judul Buku</h5>
                                             <p class="mb-1"><strong>Penulis:</strong> <span id="bukuPenulis"></span></p>
@@ -252,90 +90,118 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" id="selectedBukuTitle">
-                                <input type="hidden" id="selectedBukuAuthor">
-                                <input type="hidden" id="selectedBukuCover">
+                                <input type="hidden" id="selectedBukuTitle"> <input type="hidden" id="selectedBukuAuthor"> <input type="hidden" id="selectedBukuCover">
                             </div>
                             
                             <div class="col-12">
                                 <h4 class="mb-3">Detail Peminjaman</h4>
                                 <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label" for="tanggalPinjam">Tanggal Pinjam</label>
-                                        <input type="date" class="form-control" id="tanggalPinjam" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label" for="tanggalKembali">Tanggal Kembali</label>
-                                        <input type="date" class="form-control" id="tanggalKembali" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label">Durasi Peminjaman</label>
-                                        <input type="text" class="form-control" id="durasiPeminjaman" value="14 hari" readonly>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="catatan">Catatan (Opsional)</label>
-                                        <textarea class="form-control" id="catatan" rows="2" placeholder="Tambahkan catatan jika diperlukan"></textarea>
-                                    </div>
+                                    <div class="col-md-4"> <label class="form-label" for="tanggalPinjam">Tanggal Pinjam</label> <input type="date" class="form-control" id="tanggalPinjam" required> </div>
+                                    <div class="col-md-4"> <label class="form-label" for="tanggalKembali">Tanggal Kembali</label> <input type="date" class="form-control" id="tanggalKembali" required> </div>
+                                    <div class="col-md-4"> <label class="form-label">Durasi Peminjaman</label> <input type="text" class="form-control" id="durasiPeminjaman" readonly> </div>
+                                    <div class="col-md-12"> <label class="form-label" for="catatan">Catatan (Opsional)</label> <textarea class="form-control" id="catatan" rows="2" placeholder="Tambahkan catatan jika diperlukan"></textarea> </div>
                                 </div>
                             </div>
                             
-                            <div class="col-12 mt-4">
-                                <div class="d-flex justify-content-between">
-                                    <a href="peminjaman.html" class="btn btn-outline-secondary">
-                                        Kembali
-                                    </a>
-                                    <button type="submit" class="btn btn-primary">
-                                        Simpan Peminjaman
-                                    </button>
-                                </div>
-                            </div>
+                            <div class="col-12 mt-4"> <div class="d-flex justify-content-between"> <a href="peminjaman.html" class="btn btn-outline-secondary"> Kembali </a> <button type="submit" class="btn btn-primary"> Simpan Peminjaman </button> </div> </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        function getDefaultAvatar(name) { /* ... (Fungsi getDefaultAvatar sama seperti sebelumnya) ... */ 
+            if (!name) name = "??";
+            const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const colors = ['#3498db', '#2ecc71', '#e74c3c', '#f39c12', '#9b59b6', '#1abc9c', '#d35400'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            return `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><rect width="60" height="60" fill="${color}"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Quicksand, sans-serif" font-size="24" fill="white">${initials}</text></svg>`)}`;
+        }
+        
+        function updateAdminNameSidebar() {
+             const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
+             if (adminProfile && adminProfile.name) {
+                  document.getElementById('sidebarAdminNameDetail').textContent = adminProfile.name;
+             }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            updateAdminNameSidebar();
             const loanForm = document.getElementById('loanForm');
             const tanggalPinjamField = document.getElementById('tanggalPinjam');
             const tanggalKembaliField = document.getElementById('tanggalKembali');
             const durasiPeminjamanField = document.getElementById('durasiPeminjaman');
+            const DEFAULT_LOAN_DURATION_DAYS = 14; // Durasi peminjaman default dalam hari
 
-            // Admin name in sidebar
-            const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
-            if (adminProfile && adminProfile.name) {
-                 document.getElementById('sidebarAdminNameDetail').textContent = adminProfile.name;
+            function calculateAndDisplayDuration() {
+                const pinjamDateStr = tanggalPinjamField.value;
+                const kembaliDateStr = tanggalKembaliField.value;
+
+                if (pinjamDateStr && kembaliDateStr) {
+                    const pinjamDate = new Date(pinjamDateStr);
+                    const kembaliDate = new Date(kembaliDateStr);
+
+                    // Pastikan tanggal valid dan tanggal kembali tidak sebelum tanggal pinjam
+                    if (!isNaN(pinjamDate.getTime()) && !isNaN(kembaliDate.getTime()) && kembaliDate >= pinjamDate) {
+                        // Hitung selisih waktu dalam milidetik
+                        const diffTime = kembaliDate.getTime() - pinjamDate.getTime();
+                        // Konversi milidetik ke hari (1000ms * 60s * 60min * 24jam)
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        durasiPeminjamanField.value = diffDays + " hari";
+                    } else if (kembaliDate < pinjamDate) {
+                        durasiPeminjamanField.value = "Tgl kembali invalid";
+                    } else {
+                        durasiPeminjamanField.value = "-"; // Jika salah satu tanggal tidak valid
+                    }
+                } else {
+                    durasiPeminjamanField.value = "-"; // Jika salah satu field tanggal kosong
+                }
             }
 
+            function handleTanggalPinjamChange() {
+                const pinjamDateStr = tanggalPinjamField.value;
+                if (pinjamDateStr) {
+                    const pinjamDate = new Date(pinjamDateStr);
+                    if (!isNaN(pinjamDate.getTime())) {
+                        const kembaliDate = new Date(pinjamDate);
+                        kembaliDate.setDate(kembaliDate.getDate() + DEFAULT_LOAN_DURATION_DAYS);
+                        tanggalKembaliField.value = kembaliDate.toISOString().split('T')[0];
+                    }
+                }
+                calculateAndDisplayDuration(); // Selalu update durasi setelah tanggal pinjam berubah
+            }
 
-            // Dummy data Anggota (di aplikasi nyata ini dari database)
-            const dummyAnggota = [
-                { name: "Ahmad Sutisna", nim: "20202021", prodi: "Teknik Informatika", status: "Aktif", peminjamanAktif: "2 buku", avatar: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMzQ5OGRiIj48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnptMCAzYzEuLjY2IDAgMyAzLjEzIDMgN3MtMS4zNCAzLTMgMy0zLTMuMTMtMy03IDEuMzQtMyAzLTN6bTAgMTJjLTIuMjEgMC00LTEuNzktNC00czEuNzktNCA0LTQgNCAxLjc5IDQgNC0xLjc5IDQtNCA0eiIvPjwvc3ZnPg=="},
-                { name: "Budi Santoso", nim: "20202022", prodi: "Sistem Informasi", status: "Aktif", peminjamanAktif: "0 buku", avatar: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMmVDQzcxIj48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnptMCAzYzEuLjY2IDAgMyAzLjEzIDMgN3MtMS4zNCAzLTMgMy0zLTMuMTMtMy03IDEuMzQtMyAzLTN6bTAgMTJjLTIuMjEgMC00LTEuNzktNC00czEuNzktNCA0LTQgNCAxLjc5IDQgNC0xLjc5IDQtNCA0eiIvPjwvc3ZnPg==" },
-            ];
+            tanggalPinjamField.addEventListener('change', handleTanggalPinjamChange);
+            tanggalKembaliField.addEventListener('change', calculateAndDisplayDuration);
 
-            // Fungsi "Cari Anggota"
-            document.getElementById('findAnggotaButton').addEventListener('click', () => {
+            // Inisialisasi tanggal dan durasi saat halaman dimuat
+            const today = new Date().toISOString().split('T')[0];
+            tanggalPinjamField.value = today;
+            handleTanggalPinjamChange(); // Ini akan mengatur tanggal kembali dan durasi awal
+
+            // --- Logika Cari Anggota (Sudah diperbaiki sebelumnya) ---
+            document.getElementById('findAnggotaButton').addEventListener('click', () => { /* ... (sama seperti kode Anda yang sudah benar) ... */ 
                 const searchTerm = document.getElementById('searchAnggota').value.toLowerCase();
-                const foundAnggota = dummyAnggota.find(a => a.name.toLowerCase().includes(searchTerm) || a.nim.includes(searchTerm));
                 const anggotaInfoCard = document.getElementById('anggotaInfoCard');
-
+                const membersFromStorage = JSON.parse(sessionStorage.getItem('members')) || [];
+                const foundAnggota = membersFromStorage.find(member =>
+                    (member.name && member.name.toLowerCase().includes(searchTerm)) ||
+                    (member.nim && member.nim.toLowerCase().includes(searchTerm))
+                );
                 if (foundAnggota) {
-                    document.getElementById('anggotaAvatar').src = foundAnggota.avatar;
+                    document.getElementById('anggotaAvatar').src = foundAnggota.avatar || getDefaultAvatar(foundAnggota.name);
                     document.getElementById('anggotaNama').textContent = foundAnggota.name;
                     document.getElementById('anggotaNim').textContent = `NIM: ${foundAnggota.nim}`;
-                    document.getElementById('anggotaProdi').textContent = foundAnggota.prodi;
+                    document.getElementById('anggotaProdi').textContent = foundAnggota.prodi || 'N/A';
                     document.getElementById('anggotaStatus').textContent = foundAnggota.status;
-                    document.getElementById('anggotaPeminjamanAktif').textContent = foundAnggota.peminjamanAktif;
+                    document.getElementById('anggotaStatus').className = `badge bg-${foundAnggota.status === 'Aktif' ? 'success' : 'danger'}`;
+                    document.getElementById('anggotaPeminjamanAktif').textContent = "N/A (dummy)"; 
                     anggotaInfoCard.style.display = 'block';
-
                     document.getElementById('selectedAnggotaName').value = foundAnggota.name;
                     document.getElementById('selectedAnggotaNim').value = foundAnggota.nim;
-                    document.getElementById('selectedAnggotaAvatar').value = foundAnggota.avatar;
+                    document.getElementById('selectedAnggotaAvatar').value = foundAnggota.avatar || getDefaultAvatar(foundAnggota.name);
                 } else {
                     alert('Anggota tidak ditemukan.');
                     anggotaInfoCard.style.display = 'none';
@@ -345,25 +211,21 @@
                 }
             });
             
-            // Fungsi "Cari Buku"
-            document.getElementById('findBukuButton').addEventListener('click', () => {
+            // --- Logika Cari Buku (Sama seperti sebelumnya) ---
+            document.getElementById('findBukuButton').addEventListener('click', () => { /* ... (sama seperti kode Anda yang sudah benar) ... */ 
                 const searchTerm = document.getElementById('searchBuku').value.toLowerCase();
                 const books = JSON.parse(sessionStorage.getItem('books')) || [];
-                const foundBuku = books.find(b => b.title.toLowerCase().includes(searchTerm) || 
-                                                (b.author && b.author.toLowerCase().includes(searchTerm)) );
-                                                // Anda bisa tambahkan pencarian ISBN jika ada di data buku
+                const foundBuku = books.find(b => (b.title && b.title.toLowerCase().includes(searchTerm)) || (b.author && b.author.toLowerCase().includes(searchTerm)));
                 const bukuInfoCard = document.getElementById('bukuInfoCard');
-
                 if (foundBuku) {
-                    document.getElementById('bukuCoverPreview').src = foundBuku.cover || 'assets/default-cover.png';
+                    document.getElementById('bukuCoverPreview').src = foundBuku.cover || getDefaultAvatar(foundBuku.title);
                     document.getElementById('bukuJudul').textContent = foundBuku.title;
-                    document.getElementById('bukuPenulis').textContent = foundBuku.author;
-                    document.getElementById('bukuPenerbit').textContent = foundBuku.publisher;
-                    document.getElementById('bukuTahun').textContent = foundBuku.year;
-                    document.getElementById('bukuKategori').textContent = foundBuku.category;
-                    document.getElementById('bukuStok').textContent = foundBuku.stock;
+                    document.getElementById('bukuPenulis').textContent = foundBuku.author || 'N/A';
+                    document.getElementById('bukuPenerbit').textContent = foundBuku.publisher || 'N/A';
+                    document.getElementById('bukuTahun').textContent = foundBuku.year || 'N/A';
+                    document.getElementById('bukuKategori').textContent = foundBuku.category || 'N/A';
+                    document.getElementById('bukuStok').textContent = foundBuku.stock || 'N/A';
                     bukuInfoCard.style.display = 'block';
-
                     document.getElementById('selectedBukuTitle').value = foundBuku.title;
                     document.getElementById('selectedBukuAuthor').value = foundBuku.author;
                     document.getElementById('selectedBukuCover').value = foundBuku.cover;
@@ -376,66 +238,36 @@
                 }
             });
 
-
-            function setReturnDate() {
-                const pinjamDate = new Date(tanggalPinjamField.value);
-                if (!isNaN(pinjamDate.getTime())) {
-                    const kembaliDate = new Date(pinjamDate);
-                    kembaliDate.setDate(kembaliDate.getDate() + 14);
-                    
-                    const formattedDate = kembaliDate.toISOString().split('T')[0];
-                    tanggalKembaliField.value = formattedDate;
-                    durasiPeminjamanField.value = "14 hari";
-                }
-            }
-
-            tanggalPinjamField.addEventListener('change', setReturnDate);
-            
-            // Set tanggal pinjam default ke hari ini
-            const today = new Date().toISOString().split('T')[0];
-            tanggalPinjamField.value = today;
-            setReturnDate(); // Set tanggal kembali berdasarkan tanggal hari ini
-
-            loanForm.addEventListener('submit', function(event) {
+            // --- Logika Submit Form Peminjaman (Sama seperti sebelumnya) ---
+            loanForm.addEventListener('submit', function(event) { /* ... (sama seperti kode Anda yang sudah benar) ... */ 
                 event.preventDefault();
-
                 const borrowerName = document.getElementById('selectedAnggotaName').value;
-                const nim = document.getElementById('selectedAnggotaNim').value;
-                const userAvatar = document.getElementById('selectedAnggotaAvatar').value;
-
                 const bookTitle = document.getElementById('selectedBukuTitle').value;
-                const bookAuthor = document.getElementById('selectedBukuAuthor').value;
-                const bookCover = document.getElementById('selectedBukuCover').value;
-
                 if (!borrowerName || !bookTitle) {
-                    alert('Harap pilih anggota dan buku terlebih dahulu.');
+                    alert('Harap pilih anggota dan buku terlebih dahulu menggunakan tombol "Cari".');
                     return;
                 }
-
                 const loanData = {
                     id: parseInt(sessionStorage.getItem('nextLoanId') || '1'),
                     borrowerName: borrowerName,
-                    nim: nim,
-                    userAvatar: userAvatar,
+                    nim: document.getElementById('selectedAnggotaNim').value,
+                    userAvatar: document.getElementById('selectedAnggotaAvatar').value,
                     bookTitle: bookTitle,
-                    bookAuthor: bookAuthor,
-                    bookCover: bookCover,
+                    bookAuthor: document.getElementById('selectedBukuAuthor').value,
+                    bookCover: document.getElementById('selectedBukuCover').value,
                     loanDate: tanggalPinjamField.value,
                     returnDate: tanggalKembaliField.value,
-                    status: 'Dipinjam', // Status awal
+                    status: 'Dipinjam',
                     notes: document.getElementById('catatan').value
                 };
-
                 let loans = JSON.parse(sessionStorage.getItem('loans')) || [];
                 loans.push(loanData);
                 sessionStorage.setItem('nextLoanId', (loanData.id + 1).toString());
                 sessionStorage.setItem('loans', JSON.stringify(loans));
-
                 alert('Data peminjaman berhasil disimpan!');
                 window.location.href = 'peminjaman.html';
             });
         });
     </script>
 </body>
-
 </html>

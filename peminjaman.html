@@ -6,339 +6,155 @@
     <meta name="description" content="Sistem Peminjaman Buku Perpustakaan">
     <meta name="author" content="Perpustakaan">
     <title>Peminjaman Buku - Perpustakaan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <style>
-       
-         body {
+        body {
             min-height: 100vh;
-            min-height: -webkit-fill-available;
             font-family: "Quicksand", sans-serif;
-            font-optical-sizing: auto;
             font-weight: 500;
-            font-style: normal;
             background-color: #f8f9fa;
         }
 
+        .sidebar {
+            position: fixed; /* Membuat sidebar tetap */
+            top: 0;
+            left: 0;
+            height: 100vh; /* Tinggi sidebar 100% dari viewport */
+            width: 280px; /* Lebar sidebar yang sudah ada */
+            overflow-y: auto; /* Scroll di dalam sidebar jika kontennya panjang */
+            z-index: 1030; /* Pastikan di atas konten lain (Bootstrap navbar biasanya 1030) */
+            transition: transform 0.3s ease-in-out; /* Transisi untuk tampilan mobile */
+        }
 
         .content {
-            background-color: #f8f9fa;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
-                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23e9ecef" stroke-width="0.5"/></svg>');
-            background-size: 20px 20px;
             padding: 2rem;
             min-height: 100vh;
+            margin-left: 280px; /* Memberi ruang untuk sidebar fixed */
+            /* background-image dan background-size bisa dipertahankan jika diinginkan */
+             background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)),
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%23e9ecef" stroke-width="0.5"/></svg>');
+            background-size: 20px 20px;
         }
 
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            margin-bottom: 1.5rem;
-        }
+        .card { border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: none; transition: transform 0.3s, box-shadow 0.3s; margin-bottom: 1.5rem; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .card-header { background: linear-gradient(120deg, #3498db, #1a6ca6); color: white; border-radius: 10px 10px 0 0 !important; padding: 1rem 1.25rem; font-weight: 600; }
+        .status-badge { padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; }
+        .btn-action { min-width: 100px; margin: 0 3px; }
+        .book-cover { width: 80px; height: 110px; object-fit: cover; border-radius: 5px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+        .book-title { font-weight: 700; color: #2c3e50; }
+        .book-author { font-size: 0.9rem; color: #7f8c8d; }
+        .form-control, .form-select { border-radius: 8px; padding: 0.75rem 1rem; border: 1px solid #e0e6ed; }
+        .form-control:focus, .form-select:focus { box-shadow: 0 0 0 3px rgba(52,152,219,0.2); border-color: #3498db; }
+        .btn-primary { background: linear-gradient(120deg, #3498db, #2980b9); border: none; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; }
+        .btn-success { background: linear-gradient(120deg, #2ecc71, #27ae60); border: none; }
+        .btn-danger { background: linear-gradient(120deg, #e74c3c, #c0392b); border: none; }
+        .filter-section { background-color: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 1.5rem; }
+        .stat-card { border-left: 4px solid #3498db; background: white; }
+        .stat-card.success { border-left-color: #2ecc71; }
+        .stat-card.warning { border-left-color: #f39c12; }
+        .stat-card.danger { border-left-color: #e74c3c; }
+        .stat-number { font-size: 1.8rem; font-weight: 700; color: #2c3e50; }
+        .stat-label { font-size: 0.9rem; color: #7f8c8d; }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-header {
-            background: linear-gradient(120deg, #3498db, #1a6ca6);
-            color: white;
-            border-radius: 10px 10px 0 0 !important;
-            padding: 1rem 1.25rem;
-            font-weight: 600;
-        }
-
-        .status-badge {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .btn-action {
-            min-width: 100px;
-            margin: 0 3px;
-        }
-
-        .book-cover {
-            width: 80px;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 5px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-        }
-
-        .book-title {
-            font-weight: 700;
-            color: #2c3e50;
-        }
-
-        .book-author {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-        }
-
-        .form-control, .form-select {
-            border-radius: 8px;
-            padding: 0.75rem 1rem;
-            border: 1px solid #e0e6ed;
-        }
-
-        .form-control:focus, .form-select:focus {
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-            border-color: #3498db;
-        }
-
-        .btn-primary {
-            background: linear-gradient(120deg, #3498db, #2980b9);
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-        }
-
-        .btn-success {
-            background: linear-gradient(120deg, #2ecc71, #27ae60);
-            border: none;
-        }
-
-        .btn-danger {
-            background: linear-gradient(120deg, #e74c3c, #c0392b);
-            border: none;
-        }
-
-        .filter-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
-        }
-
-        .stat-card {
-            border-left: 4px solid #3498db;
-            background: white;
-        }
-
-        .stat-card.success {
-            border-left-color: #2ecc71;
-        }
-
-        .stat-card.warning {
-            border-left-color: #f39c12;
-        }
-
-        .stat-card.danger {
-            border-left-color: #e74c3c;
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-        }
-
-        @media (max-width: 768px) {
+        /* Penyesuaian untuk layar kecil (Mobile) */
+        @media (max-width: 767.98px) { /* Di bawah breakpoint 'md' Bootstrap */
             .sidebar {
-                width: 100% !important;
+                position: static; /* Kembalikan ke static agar bisa di-scroll bersama halaman */
                 height: auto;
-                position: relative;
+                width: 100% !important; /* Lebar penuh */
             }
-
             .content {
-                padding: 1rem;
+                margin-left: 0; /* Hapus margin kiri */
+                padding: 1rem; /* Mungkin padding lebih kecil untuk mobile */
+            }
+            /* Jika Anda menggunakan flexbox di <main>, pastikan susunannya menjadi kolom di mobile */
+            main.d-flex {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 
 <body>
-    <main class="d-flex flex-column flex-md-row">
-            <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light"
-                style="width: 280px;">
-                <a href="/"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <img src="assets/udb.png" class="bi me-2" height="32">
-                    <span class="fs-4">Perpustakaan</span>
+    <main class="d-flex"> 
+        <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light"> <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <img src="assets/udb.png" class="bi me-2" height="32"> <span class="fs-4">Perpustakaan</span>
+            </a> <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item"> <a href="koleksi-buku.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?id=85767&format=png&color=000000" alt>Koleksi Buku </a> </li>
+                <li> <a href="peminjaman.html" class="nav-link active" aria-current="page"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=ffffff" alt>Peminjaman </a> </li>
+                <li> <a href="pengumuman.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=77&format=png&color=000000" alt>Pengumuman </a> </li>
+                <li> <a href="anggota.html" class="nav-link link-dark"> <img class="bi me-2" width="16" height="16" src="https://img.icons8.com/?size=100&id=12107&format=png&color=000000" alt>Manajemen Anggota </a> </li>
+            </ul> <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000" alt="User" width="32" height="32" class="rounded-circle me-2"> <strong id="sidebarAdminName">Admin</strong>
                 </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="koleksi-buku.html" class="nav-link link-dark"
-                            aria-current="page">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?id=85767&format=png&color=000000"
-                                alt>Koleksi Buku
-                        </a>
-                    </li>
-                    <li>
-                        <a href="peminjaman.html" class="nav-link active">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=ffffff"
-                                alt>Peminjaman
-                        </a>
-                    </li>
-                    <li>
-                        <a href="pengumuman.html" class="nav-link link-dark">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?size=100&id=77&format=png&color=000000"
-                                alt>Pengumuman
-                        </a>
-                    </li>
-                    <a href="anggota.html" class="nav-link link-dark">
-                         <img class="bi me-2" width="16" height="16"
-                            src="https://img.icons8.com/?size=100&id=12107&format=png&color=000000" alt>Manajemen Anggota
-                    </a>
-                </li>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="profile.html">Profile</a></li> <li><hr class="dropdown-divider"></li> <li><a class="dropdown-item" href="index.html">Sign out</a></li>
                 </ul>
-                <hr>
-                <div class="dropdown">
-                    <a href="#"
-                        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                        id="dropdownUser2" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img
-                            src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000"
-                            alt width="32" height="32"
-                            class="rounded-circle me-2">
-                        <strong id="sidebarAdminName">Admin Perpustakaan 1</strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow"
-                        aria-labelledby="dropdownUser2">
-                        <li>
-                            <a class="dropdown-item" href="profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="index.html">Sign
-                                out</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
+        </div>
 
         <div class="content flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="mb-0">Daftar Peminjaman Buku</h2>
                 <a href="form-peminjaman.html" class="btn btn-primary">
-                    <i class="bi bi-plus-circle me-2"></i>Tambah Peminjaman
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>Tambah Peminjaman
                 </a>
             </div>
             
             <div class="row mb-4">
-                <div class="col-md-3 mb-3">
-                    <div class="card stat-card h-100">
-                        <div class="card-body">
-                            <div class="stat-number" id="totalPeminjaman">0</div>
-                            <div class="stat-label">Total Peminjaman</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card stat-card success h-100">
-                        <div class="card-body">
-                            <div class="stat-number" id="totalDikembalikan">0</div>
-                            <div class="stat-label">Dikembalikan</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card stat-card warning h-100">
-                        <div class="card-body">
-                            <div class="stat-number" id="totalDipinjam">0</div>
-                            <div class="stat-label">Dipinjam</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card stat-card danger h-100">
-                        <div class="card-body">
-                            <div class="stat-number" id="totalTerlambat">0</div>
-                            <div class="stat-label">Terlambat</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="col-md-3 mb-3"> <div class="card stat-card h-100"> <div class="card-body"> <div class="stat-number" id="totalPeminjaman">0</div> <div class="stat-label">Total Peminjaman</div> </div> </div> </div>
+                <div class="col-md-3 mb-3"> <div class="card stat-card success h-100"> <div class="card-body"> <div class="stat-number" id="totalDikembalikan">0</div> <div class="stat-label">Dikembalikan</div> </div> </div> </div>
+                <div class="col-md-3 mb-3"> <div class="card stat-card warning h-100"> <div class="card-body"> <div class="stat-number" id="totalDipinjam">0</div> <div class="stat-label">Dipinjam</div> </div> </div> </div>
+                <div class="col-md-3 mb-3"> <div class="card stat-card danger h-100"> <div class="card-body"> <div class="stat-number" id="totalTerlambat">0</div> <div class="stat-label">Terlambat</div> </div> </div> </div>
             </div>
             
             <div class="filter-section mb-4">
                 <h5 class="mb-3">Filter Peminjaman</h5>
                 <div class="row">
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label" for="filterStatus">Status</label>
-                        <select class="form-select" id="filterStatus">
-                            <option value="Semua Status" selected>Semua Status</option>
-                            <option value="Dipinjam">Dipinjam</option>
-                            <option value="Dikembalikan">Dikembalikan</option>
-                            <option value="Terlambat">Terlambat</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label" for="filterStartDate">Tanggal Mulai</label>
-                        <input type="date" class="form-control" id="filterStartDate">
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label class="form-label" for="filterEndDate">Tanggal Selesai</label>
-                        <input type="date" class="form-control" id="filterEndDate">
-                    </div>
-                    <div class="col-md-3 mb-3 d-flex align-items-end">
-                        <button class="btn btn-primary w-100" id="applyFilterButton">Terapkan Filter</button>
-                    </div>
+                    <div class="col-md-3 mb-3"> <label class="form-label" for="filterStatus">Status</label> <select class="form-select" id="filterStatus"> <option value="Semua Status" selected>Semua Status</option> <option value="Dipinjam">Dipinjam</option> <option value="Dikembalikan">Dikembalikan</option> <option value="Terlambat">Terlambat</option> </select> </div>
+                    <div class="col-md-3 mb-3"> <label class="form-label" for="filterStartDate">Tanggal Mulai</label> <input type="date" class="form-control" id="filterStartDate"> </div>
+                    <div class="col-md-3 mb-3"> <label class="form-label" for="filterEndDate">Tanggal Selesai</label> <input type="date" class="form-control" id="filterEndDate"> </div>
+                    <div class="col-md-3 mb-3 d-flex align-items-end"> <button class="btn btn-primary w-100" id="applyFilterButton">Terapkan Filter</button> </div>
                 </div>
             </div>
             
             <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <div>Daftar Peminjaman Aktif</div>
-                    <div class="d-flex">
-                        <input type="text" class="form-control me-2" id="searchPeminjam" placeholder="Cari peminjam..." style="width: 250px;">
-                        <button class="btn btn-outline-light" id="searchButton">Cari</button> </div>
-                </div>
+                <div class="card-header d-flex justify-content-between align-items-center"> <div>Daftar Peminjaman Aktif</div> <div class="d-flex"> <input type="text" class="form-control me-2" id="searchPeminjam" placeholder="Cari peminjam..." style="width: 250px;"> <button class="btn btn-outline-light" id="searchButton">Cari</button> </div> </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Peminjam</th>
-                                    <th>Buku</th>
-                                    <th>Tanggal Pinjam</th>
-                                    <th>Tanggal Kembali</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody id="loan-table-body">
-                                </tbody>
+                            <thead class="table-light"> <tr> <th>No</th> <th>Peminjam</th> <th>Buku</th> <th>Tanggal Pinjam</th> <th>Tanggal Kembali</th> <th>Status</th> <th>Aksi</th> </tr> </thead>
+                            <tbody id="loan-table-body"> </tbody>
                         </table>
                     </div>
-                    
-                    <nav class="mt-4 d-none" id="pagination-nav">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled"><a class="page-link" href="#">Sebelumnya</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
-                        </ul>
-                    </nav>
+                    <nav class="mt-4 d-none" id="pagination-nav"> <ul class="pagination justify-content-center"> <li class="page-item disabled"><a class="page-link" href="#">Sebelumnya</a></li> <li class="page-item active"><a class="page-link" href="#">1</a></li> <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li> </ul> </nav>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let allLoans = []; // Untuk menyimpan semua data peminjaman dari sessionStorage
+        // JavaScript untuk loadLoans, updateStats, renderLoans, markAsReturned, viewLoanDetail, applyFiltersAndSearch, updateAdminNameSidebar
+        // (Sama seperti JavaScript yang sudah berfungsi dengan baik di file peminjaman.html Anda sebelumnya)
+        // Pastikan semua fungsi tersebut ada di sini.
 
+        let allLoans = []; 
+
+        function updateAdminNameSidebar() {
+            const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
+            if (adminProfile && adminProfile.name) {
+                document.getElementById('sidebarAdminName').textContent = adminProfile.name;
+            }
+        }
         function updateStats() {
             const totalPeminjaman = allLoans.length;
             const totalDikembalikan = allLoans.filter(loan => loan.status === 'Dikembalikan').length;
@@ -353,7 +169,7 @@
         
         function renderLoans(loansToRender) {
             const tableBody = document.getElementById('loan-table-body');
-            tableBody.innerHTML = ''; // Kosongkan tabel
+            tableBody.innerHTML = ''; 
 
             if (loansToRender.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Tidak ada data peminjaman.</td></tr>';
@@ -374,29 +190,19 @@
                         <td>${index + 1}</td>
                         <td>
                             <div class="d-flex align-items-center">
-                                <div class="me-3">
-                                    <img src="${loan.userAvatar || 'assets/default-user.png'}" alt="User" width="40" height="40" class="rounded-circle">
-                                </div>
-                                <div>
-                                    <div class="fw-bold">${loan.borrowerName}</div>
-                                    <div class="text-muted small">NIM: ${loan.nim}</div>
-                                </div>
+                                <div class="me-3"> <img src="${loan.userAvatar || 'assets/default-user.png'}" alt="User" width="40" height="40" class="rounded-circle"> </div>
+                                <div> <div class="fw-bold">${loan.borrowerName}</div> <div class="text-muted small">NIM: ${loan.nim}</div> </div>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex">
                                 <img src="${loan.bookCover || 'assets/default-cover.png'}" alt="Cover" class="book-cover me-3">
-                                <div>
-                                    <div class="book-title">${loan.bookTitle}</div>
-                                    <div class="book-author">${loan.bookAuthor}</div>
-                                </div>
+                                <div> <div class="book-title">${loan.bookTitle}</div> <div class="book-author">${loan.bookAuthor}</div> </div>
                             </div>
                         </td>
                         <td>${new Date(loan.loanDate).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'})}</td>
                         <td>${new Date(loan.returnDate).toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric'})}</td>
-                        <td>
-                            <span class="badge ${statusBadgeClass} bg-gradient status-badge">${loan.status}</span>
-                        </td>
+                        <td> <span class="badge ${statusBadgeClass} bg-gradient status-badge">${loan.status}</span> </td>
                         <td>
                             <button class="btn btn-success btn-sm btn-action" ${loan.status === 'Dikembalikan' ? 'disabled' : ''} onclick="markAsReturned(${loan.id})">Kembalikan</button>
                             <button class="btn btn-outline-secondary btn-sm btn-action" onclick="viewLoanDetail(${loan.id})">Detail</button>
@@ -409,84 +215,50 @@
 
         function loadLoans() {
             allLoans = JSON.parse(sessionStorage.getItem('loans')) || [];
-            renderLoans(allLoans);
-            updateStats();
+            applyFiltersAndSearch(); // Panggil ini agar filter awal (jika ada) dan search (jika ada) diterapkan
         }
 
         function markAsReturned(loanId) {
             if (confirm('Apakah Anda yakin buku ini sudah dikembalikan?')) {
                 allLoans = allLoans.map(loan => {
-                    if (loan.id === loanId) {
-                        return { ...loan, status: 'Dikembalikan' };
-                    }
+                    if (loan.id === loanId) { return { ...loan, status: 'Dikembalikan' }; }
                     return loan;
                 });
                 sessionStorage.setItem('loans', JSON.stringify(allLoans));
-                applyFiltersAndSearch(); // Terapkan filter dan pencarian setelah update
+                applyFiltersAndSearch(); 
             }
         }
         
         function viewLoanDetail(loanId){
-            // Untuk dummy, kita bisa tampilkan alert atau redirect ke form peminjaman dengan mode view
-            // Di sini kita hanya tampilkan alert
             const loan = allLoans.find(l => l.id === loanId);
-            if(loan){
-                alert(`Detail Peminjaman:\nID: ${loan.id}\nPeminjam: ${loan.borrowerName}\nBuku: ${loan.bookTitle}\nStatus: ${loan.status}`);
-            }
+            if(loan){ alert(`Detail Peminjaman:\nID: ${loan.id}\nPeminjam: ${loan.borrowerName}\nBuku: ${loan.bookTitle}\nStatus: ${loan.status}`); }
         }
 
         function applyFiltersAndSearch() {
-            let filteredLoans = [...allLoans];
+            let filteredLoans = [...allLoans]; // Salin semua data pinjaman
             const statusFilter = document.getElementById('filterStatus').value;
             const startDateFilter = document.getElementById('filterStartDate').value;
             const endDateFilter = document.getElementById('filterEndDate').value;
             const searchTerm = document.getElementById('searchPeminjam').value.toLowerCase();
 
-            // Filter berdasarkan status
-            if (statusFilter !== "Semua Status") {
-                filteredLoans = filteredLoans.filter(loan => loan.status === statusFilter);
-            }
-
-            // Filter berdasarkan tanggal mulai (Tanggal Pinjam >= StartDate)
-            if (startDateFilter) {
-                filteredLoans = filteredLoans.filter(loan => new Date(loan.loanDate) >= new Date(startDateFilter));
-            }
-
-            // Filter berdasarkan tanggal selesai (Tanggal Pinjam <= EndDate)
-            if (endDateFilter) {
-                filteredLoans = filteredLoans.filter(loan => new Date(loan.loanDate) <= new Date(endDateFilter));
-            }
-            
-            // Filter berdasarkan pencarian nama peminjam
-            if (searchTerm) {
-                filteredLoans = filteredLoans.filter(loan => loan.borrowerName.toLowerCase().includes(searchTerm));
-            }
+            if (statusFilter !== "Semua Status") { filteredLoans = filteredLoans.filter(loan => loan.status === statusFilter); }
+            if (startDateFilter) { filteredLoans = filteredLoans.filter(loan => new Date(loan.loanDate) >= new Date(startDateFilter)); }
+            if (endDateFilter) { filteredLoans = filteredLoans.filter(loan => new Date(loan.loanDate) <= new Date(endDateFilter)); }
+            if (searchTerm) { filteredLoans = filteredLoans.filter(loan => loan.borrowerName.toLowerCase().includes(searchTerm)); }
 
             renderLoans(filteredLoans);
-            updateStats(); // Update stats berdasarkan data yang ada di allLoans, bukan filteredLoans agar stats global
+            updateStats(); // Update statistik berdasarkan semua data, bukan yang terfilter saja
         }
 
-
         document.addEventListener('DOMContentLoaded', () => {
-            loadLoans(); // Muat semua data saat halaman pertama kali dibuka
+            updateAdminNameSidebar();
+            loadLoans(); 
             
-            // Admin name in sidebar
-            const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
-            if (adminProfile && adminProfile.name) {
-                document.getElementById('sidebarAdminName').textContent = adminProfile.name;
-                const userDropdownToggle = document.querySelector('#dropdownUser2 strong');
-                if(userDropdownToggle) userDropdownToggle.textContent = adminProfile.name;
-            }
-
-
             document.getElementById('applyFilterButton').addEventListener('click', applyFiltersAndSearch);
             document.getElementById('searchButton').addEventListener('click', applyFiltersAndSearch);
             document.getElementById('searchPeminjam').addEventListener('keyup', function(event) {
-                 if (event.key === 'Enter' || this.value === '') { // Trigger search on Enter or if input is cleared
-                    applyFiltersAndSearch();
-                }
+                 if (event.key === 'Enter' || this.value === '') { applyFiltersAndSearch(); }
             });
-             // Panggil applyFiltersAndSearch saat filter status berubah
             document.getElementById('filterStatus').addEventListener('change', applyFiltersAndSearch);
             document.getElementById('filterStartDate').addEventListener('change', applyFiltersAndSearch);
             document.getElementById('filterEndDate').addEventListener('change', applyFiltersAndSearch);

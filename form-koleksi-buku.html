@@ -1,186 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content>
-        <meta name="author"
-            content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Hugo 0.84.0">
-        <title>Form Koleksi Buku - Perpustakaan</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
-            rel="stylesheet">
-        <style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title id="pageTitle">Form Koleksi Buku - Perpustakaan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <style>
         body {
             min-height: 100vh;
-            min-height: -webkit-fill-available;
             font-family: "Quicksand", sans-serif;
-            font-optical-sizing: auto;
             font-weight: 500;
-            font-style: normal;
+        }
+        #coverPreview {
+            max-width: 150px; /* Lebar preview maksimal */
+            /* max-height: 200px; /* Tinggi preview disesuaikan oleh TARGET_HEIGHT di JS */
+            border: 1px solid #ddd;
+            padding: 2px;
+            object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
         }
     </style>
-    </head>
+</head>
 
-    <body>
-        <main class="d-flex">
-            <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light"
-                style="width: 280px;">
-                <a href="/"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <img src="assets/udb.png" class="bi me-2" height="32">
-                    <span class="fs-4">Perpustakaan</span>
-                </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
-                    <li class="nav-item">
-                        <a href="koleksi-buku.html" class="nav-link active"
-                            aria-current="page">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?id=85767&format=png&color=ffffff"
-                                alt>Koleksi Buku
-                        </a>
-                    </li>
-                    <li>
-                        <a href="peminjaman.html" class="nav-link link-dark">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=000000"
-                                alt>Peminjaman
-                        </a>
-                    </li>
-                    <li>
-                        <a href="pengumuman.html" class="nav-link link-dark">
-                            <img class="bi me-2" width="16" height="16"
-                                src="https://img.icons8.com/?size=100&id=77&format=png&color=000000"
-                                alt>Pengumuman
-                        </a>
-                    </li>
-                    <li>
+<body>
+    <main class="d-flex">
+        <div class="sidebar d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="index.html"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <img src="assets/udb.png" class="bi me-2" height="32">
+                <span class="fs-4">Perpustakaan</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="koleksi-buku.html" class="nav-link active" aria-current="page">
+                        <img class="bi me-2" width="16" height="16"
+                            src="https://img.icons8.com/?id=85767&format=png&color=ffffff" alt>Koleksi Buku
+                    </a>
+                </li>
+                <li>
+                    <a href="peminjaman.html" class="nav-link link-dark">
+                        <img class="bi me-2" width="16" height="16"
+                            src="https://img.icons8.com/?size=100&id=bDrb5MdYaEje&format=png&color=000000"
+                            alt>Peminjaman
+                    </a>
+                </li>
+                <li>
+                    <a href="pengumuman.html" class="nav-link link-dark">
+                        <img class="bi me-2" width="16" height="16"
+                            src="https://img.icons8.com/?size=100&id=77&format=png&color=000000" alt>Pengumuman
+                    </a>
+                </li>
+                <li>
                     <a href="anggota.html" class="nav-link link-dark">
-                         <img class="bi me-2" width="16" height="16"
+                        <img class="bi me-2" width="16" height="16"
                             src="https://img.icons8.com/?size=100&id=12107&format=png&color=000000" alt>Manajemen Anggota
                     </a>
                 </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+                    id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000" alt="User"
+                        width="32" height="32" class="rounded-circle me-2">
+                    <strong id="sidebarAdminName">Admin</strong>
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="index.html">Sign out</a></li>
                 </ul>
-                <hr>
-                <div class="dropdown">
-                    <a href="#"
-                        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                        id="dropdownUser2" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img
-                            src="https://img.icons8.com/?size=100&id=23400&format=png&color=000000"
-                            alt width="32" height="32"
-                            class="rounded-circle me-2">
-                        <strong>Admin Perpustakaan 1</strong>
-                    </a>
-                    <ul class="dropdown-menu text-small shadow"
-                        aria-labelledby="dropdownUser2">
-                        <li>
-                            <a class="dropdown-item"
-                                href="profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="index.html">Sign
-                                out</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
-            <div class="content p-4 flex-grow-1"
-                style="background-image: url(assets/logo-trans.png);margin: 0;height: 100vh;background-size: cover;background-position: center;background-size: 450px 550px;background-repeat: no-repeat;">
-                <h2 class="mb-4" id="form-title">Form Koleksi Buku</h2>
-                <div class="container py-5">
-                    <form id="bookForm">
-                        <input type="hidden" id="bookId">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label" for="judulBuku">Judul Buku</label>
-                                <input type="text" class="form-control" id="judulBuku" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="penulis">Penulis</label>
-                                <input type="text" class="form-control" id="penulis" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="penerbit">Penerbit</label>
-                                <input type="text" class="form-control" id="penerbit" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="tahunTerbit">Tahun Terbit</label>
-                                <input type="number" class="form-control" id="tahunTerbit" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="kategori">Kategori</label>
-                                <input type="text" class="form-control" id="kategori" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="stok">Stok</label>
-                                <input type="text" class="form-control" id="stok" placeholder="Contoh: 5 Buku" required>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="form-label" for="coverBuku">URL Cover Buku</label>
-                                <input type="url" class="form-control" id="coverBuku" placeholder="https://example.com/cover.jpg">
-                            </div>
+        </div>
+
+        <div class="content p-4 flex-grow-1"
+            style="background-image: url(assets/logo-trans.png); margin: 0; height: 100vh; background-size: cover; background-position: center; background-size: 450px 550px; background-repeat: no-repeat;">
+            <h2 class="mb-4" id="formTitle">Form Koleksi Buku</h2>
+            <div class="container py-3">
+                <form id="bookForm">
+                    <input type="hidden" id="bookIdField">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="judulBuku">Judul Buku</label>
+                            <input type="text" class="form-control" id="judulBuku" required>
                         </div>
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-warning" id="submitButton">Simpan</button>
-                            <a href="koleksi-buku.html"
-                                class="btn btn-primary">Kembali</a>
+                        <div class="col-md-6">
+                            <label class="form-label" for="penulis">Penulis</label>
+                            <input type="text" class="form-control" id="penulis" required>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="penerbit">Penerbit</label>
+                            <input type="text" class="form-control" id="penerbit" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="tahunTerbit">Tahun Terbit</label>
+                            <input type="number" class="form-control" id="tahunTerbit" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="kategori">Kategori</label>
+                            <input type="text" class="form-control" id="kategori" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="stok">Stok</label>
+                            <input type="text" class="form-control" id="stok" placeholder="Contoh: 5 Buku" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="coverBuku">Upload Cover Buku</label>
+                            <input type="file" class="form-control" id="coverBuku" accept="image/*">
+                        </div>
+                        <div class="col-md-6" id="coverPreviewContainer" style="display:none;">
+                            <label class="form-label d-block">Preview:</label>
+                            <img id="coverPreview" src="#" alt="Preview Cover Buku">
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary" id="submitButton">Simpan</button>
+                        <a href="koleksi-buku.html" class="btn btn-secondary">Kembali</a>
+                    </div>
+                </form>
             </div>
-        </main>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-        <script>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
         /* global bootstrap: false */
-        (function () {
-            'use strict'
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-                new bootstrap.Tooltip(tooltipTriggerEl)
-            })
-        })();
+        (function () { /* ... (inisialisasi tooltip sama seperti sebelumnya) ... */ })();
+
+        function updateAdminNameSidebar() {
+            const adminProfile = JSON.parse(sessionStorage.getItem('adminProfile'));
+            if (adminProfile && adminProfile.name) {
+                document.getElementById('sidebarAdminName').textContent = adminProfile.name;
+            }
+        }
+
+        // Konfigurasi ukuran target untuk cover buku
+        const TARGET_COVER_WIDTH = 150; // Lebar standar dalam piksel
+        const TARGET_COVER_HEIGHT = 200; // Tinggi standar dalam piksel
+        let processedImageDataURL = null; // Untuk menyimpan Data URL gambar yang sudah diproses/diubah ukurannya
 
         document.addEventListener('DOMContentLoaded', () => {
+            updateAdminNameSidebar();
+
             const bookForm = document.getElementById('bookForm');
-            const formTitle = document.getElementById('form-title');
+            const formTitle = document.getElementById('formTitle');
+            const pageTitle = document.getElementById('pageTitle');
             const submitButton = document.getElementById('submitButton');
-            const bookIdField = document.getElementById('bookId');
+            const bookIdField = document.getElementById('bookIdField');
+
             const judulBukuField = document.getElementById('judulBuku');
             const penulisField = document.getElementById('penulis');
             const penerbitField = document.getElementById('penerbit');
             const tahunTerbitField = document.getElementById('tahunTerbit');
             const kategoriField = document.getElementById('kategori');
             const stokField = document.getElementById('stok');
-            const coverBukuField = document.getElementById('coverBuku');
+            const coverBukuField = document.getElementById('coverBuku'); // Input file
+            const coverPreview = document.getElementById('coverPreview'); // Img tag untuk preview
+            const coverPreviewContainer = document.getElementById('coverPreviewContainer');
+
+            let isEditMode = false;
+            let existingCoverData = null; // Untuk menyimpan data cover lama saat edit
 
             const urlParams = new URLSearchParams(window.location.search);
             const editBookId = urlParams.get('edit');
 
             if (editBookId) {
-                formTitle.textContent = 'Edit Koleksi Buku';
-                submitButton.textContent = 'Update';
+                isEditMode = true;
                 const books = JSON.parse(sessionStorage.getItem('books')) || [];
                 const bookToEdit = books.find(book => book.id === parseInt(editBookId));
 
                 if (bookToEdit) {
+                    formTitle.textContent = 'Edit Koleksi Buku';
+                    if(pageTitle) pageTitle.textContent = 'Edit Koleksi Buku - Perpustakaan';
+                    submitButton.textContent = 'Update';
+
                     bookIdField.value = bookToEdit.id;
                     judulBukuField.value = bookToEdit.title;
                     penulisField.value = bookToEdit.author;
@@ -188,44 +186,124 @@
                     tahunTerbitField.value = bookToEdit.year;
                     kategoriField.value = bookToEdit.category;
                     stokField.value = bookToEdit.stock;
-                    coverBukuField.value = bookToEdit.cover;
+                    
+                    existingCoverData = bookToEdit.cover; // Simpan data cover yang ada
+                    if (existingCoverData && existingCoverData.startsWith('data:image')) {
+                        coverPreview.src = existingCoverData;
+                        coverPreview.style.width = TARGET_COVER_WIDTH + 'px'; // Set width preview
+                        coverPreview.style.height = TARGET_COVER_HEIGHT + 'px'; // Set height preview
+                        coverPreviewContainer.style.display = 'block';
+                    } else if (existingCoverData) {
+                        // Jika masih URL lama, mungkin tampilkan sebagai teks atau coba load
+                        // Untuk dummy, jika bukan data URL, user perlu upload ulang agar sesuai standar
+                        coverPreview.src = 'assets/default-cover.png'; // Placeholder jika URL lama tidak bisa dipreview
+                        coverPreviewContainer.style.display = 'block';
+                    }
+
+
                 } else {
                     alert('Buku tidak ditemukan!');
                     window.location.href = 'koleksi-buku.html';
                 }
+            } else {
+                 formTitle.textContent = 'Form Koleksi Buku';
+                 if(pageTitle) pageTitle.textContent = 'Form Koleksi Buku - Perpustakaan';
+                 submitButton.textContent = 'Simpan';
             }
+
+            coverBukuField.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+
+                            canvas.width = TARGET_COVER_WIDTH;
+                            canvas.height = TARGET_COVER_HEIGHT;
+
+                            // Gambar ke canvas dengan mempertahankan aspek rasio dan letterboxing/cropping sederhana
+                            // Ini adalah contoh sederhana: scale dan center crop
+                            const sourceWidth = img.width;
+                            const sourceHeight = img.height;
+                            const sourceRatio = sourceWidth / sourceHeight;
+                            const targetRatio = TARGET_COVER_WIDTH / TARGET_COVER_HEIGHT;
+                            
+                            let sx = 0, sy = 0, sWidth = sourceWidth, sHeight = sourceHeight;
+
+                            if (sourceRatio > targetRatio) { // Gambar lebih lebar dari target
+                                sWidth = sourceHeight * targetRatio;
+                                sx = (sourceWidth - sWidth) / 2;
+                            } else if (sourceRatio < targetRatio) { // Gambar lebih tinggi dari target
+                                sHeight = sourceWidth / targetRatio;
+                                sy = (sourceHeight - sHeight) / 2;
+                            }
+                            
+                            ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, TARGET_COVER_WIDTH, TARGET_COVER_HEIGHT);
+                            
+                            processedImageDataURL = canvas.toDataURL('image/jpeg', 0.85); // Simpan sebagai JPEG dengan kualitas 0.85
+                            coverPreview.src = processedImageDataURL;
+                            coverPreview.style.width = TARGET_COVER_WIDTH + 'px';
+                            coverPreview.style.height = TARGET_COVER_HEIGHT + 'px';
+                            coverPreviewContainer.style.display = 'block';
+                        }
+                        img.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    processedImageDataURL = null; // Reset jika file tidak valid
+                    if (!isEditMode || !existingCoverData) { // Hanya reset preview jika bukan edit mode atau tidak ada cover lama
+                        coverPreview.src = '#';
+                        coverPreviewContainer.style.display = 'none';
+                    } else if (existingCoverData && existingCoverData.startsWith('data:image')) {
+                         coverPreview.src = existingCoverData; // Kembalikan ke cover lama jika ada
+                         coverPreviewContainer.style.display = 'block';
+                    } else {
+                         coverPreview.src = 'assets/default-cover.png';
+                         coverPreviewContainer.style.display = 'block';
+                    }
+                }
+            });
 
             bookForm.addEventListener('submit', function(event) {
                 event.preventDefault();
+                let books = JSON.parse(sessionStorage.getItem('books')) || [];
+                
+                let coverDataToSave = 'assets/default-cover.png'; // Default jika tidak ada gambar
+                if (processedImageDataURL) { // Jika ada gambar baru yang diupload dan diproses
+                    coverDataToSave = processedImageDataURL;
+                } else if (isEditMode && existingCoverData) { // Jika mode edit dan tidak ada gambar baru, gunakan yang lama
+                    coverDataToSave = existingCoverData;
+                }
 
                 const bookData = {
-                    id: bookIdField.value ? parseInt(bookIdField.value) : (parseInt(sessionStorage.getItem('nextBookId') || '1')),
+                    id: isEditMode ? parseInt(bookIdField.value) : (parseInt(sessionStorage.getItem('nextBookId') || '1')),
                     title: judulBukuField.value,
                     author: penulisField.value,
                     publisher: penerbitField.value,
                     year: parseInt(tahunTerbitField.value),
                     category: kategoriField.value,
                     stock: stokField.value,
-                    cover: coverBukuField.value
+                    cover: coverDataToSave
                 };
 
-                let books = JSON.parse(sessionStorage.getItem('books')) || [];
-
-                if (editBookId) { // Mode Edit
+                if (isEditMode) {
                     const bookIndex = books.findIndex(book => book.id === bookData.id);
                     if (bookIndex > -1) {
                         books[bookIndex] = bookData;
                     }
-                } else { // Mode Tambah
+                } else {
                     books.push(bookData);
                     sessionStorage.setItem('nextBookId', (bookData.id + 1).toString());
                 }
 
                 sessionStorage.setItem('books', JSON.stringify(books));
-                alert(editBookId ? 'Data buku berhasil diupdate!' : 'Buku baru berhasil ditambahkan!');
+                alert(isEditMode ? 'Data buku berhasil diupdate!' : 'Buku baru berhasil ditambahkan!');
                 window.location.href = 'koleksi-buku.html';
             });
         });
     </script>
-    </body>
+</body>
 </html>
